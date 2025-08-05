@@ -72,149 +72,223 @@
       color: #4b5563;
       cursor: not-allowed;
     }
+    /* 네비게이션 바 반응형 스타일 */
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      z-index: 50;
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 8px rgba(30,64,175,0.04);
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.9rem;
+      border-radius: 0.5rem;
+      background: #f1f5ff;
+      color: #1e40af;
+      font-weight: 500;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.18s, color 0.18s, transform 0.18s;
+    }
+    .nav-link.active,
+    .nav-link:hover {
+      background: #1e40af;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-logo img {
+      height: 2.2rem;
+      border-radius: 0.4rem;
+    }
+    .nav-logo span {
+      font-size: 1.08em;
+      font-weight: 600;
+      color: #1e40af;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 0.2rem;
+      }
+      .nav-link {
+        font-size: 0.98rem;
+        padding: 0.45rem 0.7rem;
+      }
+      .nav-logo span {
+        font-size: 0.98em;
+      }
+    }
+    @media (max-width: 480px) {
+      .nav-logo img { height: 1.6rem; }
+      .nav-logo span { font-size: 0.92em; }
+      .nav-bar { padding: 0.3rem 0.3rem; }
+      .nav-link { font-size: 0.93rem; padding: 0.35rem 0.5rem; }
+    }
+    /* 메인 콘텐츠 상단 여백 */
+    .main-content {
+      margin-top: 4.2rem;
+    }
+    @media (max-width: 480px) {
+      .main-content { margin-top: 3.2rem; }
+    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 via-white to-blue-100 text-gray-800">
-  <div class="flex h-screen">
-    <!-- 사이드바 -->
-    <aside class="w-64 bg-white/90 backdrop-blur shadow-2xl flex flex-col fade-in">
-      <div class="p-6 border-b border-gray-200">
-        <img src="학교로고.png" alt="학교 로고" class="h-14 mx-auto mb-2 transition duration-300 hover:scale-105" />
-        <h1 class="text-center text-xl font-semibold text-blue-700">서울삼육고등학교</h1>
-      </div>
-      <nav class="flex-1 px-4 py-6 space-y-4 text-base">
-        <a href="#home" class="nav-link block px-4 py-2 rounded-md bg-blue-50 hover:bg-blue-200 hover:translate-x-1 transition slide-in active">🏠 홈</a>
-        <a href="#papers" class="nav-link block px-4 py-2 rounded-md bg-blue-50 hover:bg-blue-200 hover:translate-x-1 transition slide-in delay-[60ms]">📄 논문 열람</a>
-        <a href="#lectures" class="nav-link block px-4 py-2 rounded-md bg-blue-50 hover:bg-blue-200 hover:translate-x-1 transition slide-in delay-[120ms]">🎓 온라인 강의</a>
-        <a href="#rentals" class="nav-link block px-4 py-2 rounded-md bg-blue-50 hover:bg-blue-200 hover:translate-x-1 transition slide-in delay-[180ms]">📦 물품 대여</a>
-        <a href="#schedule" class="nav-link block px-4 py-2 rounded-md bg-blue-50 hover:bg-blue-200 hover:translate-x-1 transition slide-in delay-[240ms]">🗓️ 학사 일정</a>
-        <a href="#contact" class="nav-link block px-4 py-2 rounded-md bg-blue-50 hover:bg-blue-200 hover:translate-x-1 transition slide-in delay-[300ms]">💬 문의 / 건의</a>
-      </nav>
-      <footer class="p-4 text-sm text-center text-gray-400 border-t">
-        ⓒ 2025 서울삼육고등학교
-      </footer>
-    </aside>
+  <!-- 가로 네비게이션 바 -->
+  <nav class="nav-bar fade-in">
+    <div class="nav-logo">
+      <img src="학교로고.png" alt="학교 로고" />
+      <span>서울삼육고등학교</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="nav-link active">🏠 홈</a>
+      <a href="#papers" class="nav-link">📄 논문 열람</a>
+      <a href="#lectures" class="nav-link">🎓 온라인 강의</a>
+      <a href="#rentals" class="nav-link">📦 물품 대여</a>
+      <a href="#schedule" class="nav-link">🗓️ 학사 일정</a>
+      <a href="#contact" class="nav-link">💬 문의 / 건의</a>
+    </div>
+  </nav>
 
-    <!-- 메인 콘텐츠 -->
-    <main class="flex-1 p-10 overflow-y-auto fade-in">
-      <div class="max-w-4xl mx-auto">
-        <section id="home">
-          <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">환영합니다 👋</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">
-            이 사이트에서는 <strong>논문 열람</strong>, <strong>온라인 강의 수강</strong>, <strong>학교 물품 대여</strong> 뿐만 아니라 <strong>학사 일정 확인</strong>과 <strong>문의 / 건의</strong>도 할 수 있어요.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-              <h3 class="text-xl font-semibold mb-2 text-blue-700">논문 열람</h3>
-              <p class="text-sm text-gray-500">학교 연구논문을 검색하고 바로 열람할 수 있어요.</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-              <h3 class="text-xl font-semibold mb-2 text-blue-700">온라인 강의</h3>
-              <p class="text-sm text-gray-500">언제 어디서나 수업을 듣고 복습할 수 있어요.</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-              <h3 class="text-xl font-semibold mb-2 text-blue-700">물품 대여</h3>
-              <p class="text-sm text-gray-500">교내 기자재를 손쉽게 대여하고 관리할 수 있어요.</p>
-            </div>
-          </div>
-        </section>
-        <section id="papers" class="hidden">
-          <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">논문 열람</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">원하는 논문을 빠르게 찾아 열람하세요.</p>
-          <input type="text" class="search-bar" placeholder="논문 제목 또는 키워드를 입력하세요">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-              <h3 class="text-xl font-semibold mb-2 text-blue-700">논문 제목 1</h3>
-              <p class="text-sm text-gray-500 mb-4">저자: 홍길동 | 발행일: 2025-01-01</p>
-              <button class="btn-available">열람하기</button>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-              <h3 class="text-xl font-semibold mb-2 text-blue-700">논문 제목 2</h3>
-              <p class="text-sm text-gray-500 mb-4">저자: 김영희 | 발행일: 2025-02-01</p>
-              <button class="btn-available">열람하기</button>
-            </div>
-          </div>
-        </section>
-        <section id="lectures" class="hidden">
-          <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">온라인 강의</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">다양한 강의를 수강하여 지식을 넓히세요.</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-              <h3 class="text-xl font-semibold mb-2 text-blue-700">컴퓨터 과학 입문</h3>
-              <p class="text-sm text-gray-500 mb-4">강사: 이철수 | 기간: 2025-03-01 ~ 2025-06-01</p>
-              <button class="btn-available">수강하기</button>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-              <h3 class="text-xl font-semibold mb-2 text-blue-700">데이터 분석 기초</h3>
-              <p class="text-sm text-gray-500 mb-4">강사: 박민수 | 기간: 2025-04-01 ~ 2025-07-01</p>
-              <button class="btn-available">수강하기</button>
-            </div>
-          </div>
-        </section>
-        <section id="rentals" class="hidden">
-          <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">물품 대여</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">필요한 교내 기자재를 손쉽게 대여하세요.</p>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>용품명</th>
-                <th>상태</th>
-                <th>대여 가능일</th>
-                <th>액션</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>노트북</td>
-                <td>대여 가능</td>
-                <td>즉시</td>
-                <td><button class="btn-available">대여하기</button></td>
-              </tr>
-              <tr>
-                <td>프로젝터</td>
-                <td>대여 중</td>
-                <td>2025-08-10</td>
-                <td><button class="btn-unavailable" disabled>대여하기</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-        <section id="schedule" class="hidden">
-          <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">학사 일정</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">중요한 학사 일정을 확인하세요.</p>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>일정</th>
-                <th>날짜</th>
-                <th>설명</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>중간고사</td>
-                <td>2025-09-23</td>
-                <td>2학기 중간고사</td>
-              </tr>
-              <tr>
-                <td>학교 축제</td>
-                <td>2025-11-01</td>
-                <td>학생 및 교직원 참여 행사</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-        <section id="contact" class="hidden">
-          <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">문의 / 건의</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">궁금한 점이나 건의사항을 남겨주세요.</p>
+  <!-- 메인 콘텐츠 -->
+  <main class="main-content fade-in p-4 md:p-10 overflow-y-auto">
+    <div class="max-w-4xl mx-auto">
+      <section id="home">
+        <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">환영합니다 👋</h2>
+        <p class="text-lg text-gray-600 leading-relaxed mb-8">
+          이 사이트에서는 <strong>논문 열람</strong>, <strong>온라인 강의 수강</strong>, <strong>학교 물품 대여</strong> 뿐만 아니라 <strong>학사 일정 확인</strong>과 <strong>문의 / 건의</strong>도 할 수 있어요.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-            <textarea class="search-bar" rows="4" placeholder="문의 또는 건의 내용을 입력하세요"></textarea>
-            <button class="btn-available">제출하기</button>
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">논문 열람</h3>
+            <p class="text-sm text-gray-500">학교 연구논문을 검색하고 바로 열람할 수 있어요.</p>
           </div>
-        </section>
-      </div>
-    </main>
-  </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">온라인 강의</h3>
+            <p class="text-sm text-gray-500">언제 어디서나 수업을 듣고 복습할 수 있어요.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">물품 대여</h3>
+            <p class="text-sm text-gray-500">교내 기자재를 손쉽게 대여하고 관리할 수 있어요.</p>
+          </div>
+        </div>
+      </section>
+      <section id="papers" class="hidden">
+        <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">논문 열람</h2>
+        <p class="text-lg text-gray-600 leading-relaxed mb-8">원하는 논문을 빠르게 찾아 열람하세요.</p>
+        <input type="text" class="search-bar" placeholder="논문 제목 또는 키워드를 입력하세요">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">논문 제목 1</h3>
+            <p class="text-sm text-gray-500 mb-4">저자: 홍길동 | 발행일: 2025-01-01</p>
+            <button class="btn-available">열람하기</button>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">논문 제목 2</h3>
+            <p class="text-sm text-gray-500 mb-4">저자: 김영희 | 발행일: 2025-02-01</p>
+            <button class="btn-available">열람하기</button>
+          </div>
+        </div>
+      </section>
+      <section id="lectures" class="hidden">
+        <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">온라인 강의</h2>
+        <p class="text-lg text-gray-600 leading-relaxed mb-8">다양한 강의를 수강하여 지식을 넓히세요.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">컴퓨터 과학 입문</h3>
+            <p class="text-sm text-gray-500 mb-4">강사: 이철수 | 기간: 2025-03-01 ~ 2025-06-01</p>
+            <button class="btn-available">수강하기</button>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">데이터 분석 기초</h3>
+            <p class="text-sm text-gray-500 mb-4">강사: 박민수 | 기간: 2025-04-01 ~ 2025-07-01</p>
+            <button class="btn-available">수강하기</button>
+          </div>
+        </div>
+      </section>
+      <section id="rentals" class="hidden">
+        <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">물품 대여</h2>
+        <p class="text-lg text-gray-600 leading-relaxed mb-8">필요한 교내 기자재를 손쉽게 대여하세요.</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>용품명</th>
+              <th>상태</th>
+              <th>대여 가능일</th>
+              <th>액션</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>노트북</td>
+              <td>대여 가능</td>
+              <td>즉시</td>
+              <td><button class="btn-available">대여하기</button></td>
+            </tr>
+            <tr>
+              <td>프로젝터</td>
+              <td>대여 중</td>
+              <td>2025-08-10</td>
+              <td><button class="btn-unavailable" disabled>대여하기</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="schedule" class="hidden">
+        <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">학사 일정</h2>
+        <p class="text-lg text-gray-600 leading-relaxed mb-8">중요한 학사 일정을 확인하세요.</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>일정</th>
+              <th>날짜</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>중간고사</td>
+              <td>2025-09-23</td>
+              <td>2학기 중간고사</td>
+            </tr>
+            <tr>
+              <td>학교 축제</td>
+              <td>2025-11-01</td>
+              <td>학생 및 교직원 참여 행사</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="contact" class="hidden">
+        <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">문의 / 건의</h2>
+        <p class="text-lg text-gray-600 leading-relaxed mb-8">궁금한 점이나 건의사항을 남겨주세요.</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+          <textarea class="search-bar" rows="4" placeholder="문의 또는 건의 내용을 입력하세요"></textarea>
+          <button class="btn-available">제출하기</button>
+        </div>
+      </section>
+    </div>
+  </main>
 
   <script>
     // 페이지 전환 처리
@@ -224,13 +298,13 @@
       });
       document.getElementById(sectionId).classList.remove('hidden');
       document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('bg-blue-600', 'text-white', 'active');
+        link.classList.remove('active');
       });
-      document.querySelector(`.nav-link[href="#${sectionId}"]`).classList.add('bg-blue-600', 'text-white', 'active');
+      document.querySelector(`.nav-link[href="#${sectionId}"]`).classList.add('active');
     }
     showSection('home');
 
-    // 사이드바 링크 클릭 이벤트
+    // 네비게이션 링크 클릭 이벤트
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
