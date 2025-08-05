@@ -54,23 +54,29 @@
       font-weight: 600;
     }
     .table button {
-      padding: 8px 16px;
-      border-radius: 8px;
+      padding: 8px 18px;
+      border-radius: 999px; /* pill shape */
       border: none;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.97rem;
+      font-weight: 500;
+      transition: background 0.18s, box-shadow 0.18s, transform 0.13s;
+      box-shadow: 0 1px 4px rgba(30,64,175,0.07);
     }
     .btn-available {
-      background: #1e40af;
+      background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
       color: #fff;
     }
     .btn-available:hover {
-      background: #1e3a8a;
+      background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 2px 8px rgba(30,64,175,0.13);
     }
     .btn-unavailable {
-      background: #d1d5db;
+      background: #e5e7eb;
       color: #4b5563;
       cursor: not-allowed;
+      opacity: 0.7;
     }
     /* 네비게이션 바 반응형 스타일 */
     .nav-bar {
@@ -126,6 +132,9 @@
       letter-spacing: 1px;
       white-space: nowrap;
     }
+    section {
+      scroll-margin-top: 8rem;
+    }
     @media (max-width: 768px) {
       .nav-links {
         gap: 0.2rem;
@@ -137,16 +146,21 @@
       .nav-logo span {
         font-size: 0.98em;
       }
+      section {
+        scroll-margin-top: 7rem;
+      }
     }
     @media (max-width: 480px) {
       .nav-logo img { height: 1.6rem; }
       .nav-logo span { font-size: 0.92em; }
       .nav-bar { padding: 0.3rem 0.3rem; }
       .nav-link { font-size: 0.93rem; padding: 0.35rem 0.5rem; }
+      .main-content { margin-top: 3.2rem; }
+      section { scroll-margin-top: 6rem; }
     }
     /* 메인 콘텐츠 상단 여백 */
     .main-content {
-      margin-top: 4.2rem;
+      margin-top: 8rem;
     }
     @media (max-width: 480px) {
       .main-content { margin-top: 3.2rem; }
@@ -301,10 +315,13 @@
         link.classList.remove('active');
       });
       document.querySelector(`.nav-link[href="#${sectionId}"]`).classList.add('active');
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({behavior: "smooth", block: "start"});
+      }, 10);
     }
     showSection('home');
 
-    // 네비게이션 링크 클릭 이벤트
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
