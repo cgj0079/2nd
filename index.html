@@ -192,6 +192,14 @@
       }
     }
 
+    .nav-bar,
+    .nav-links,
+    .nav-link,
+    .nav-logo,
+    .nav-logo span {
+      user-select: none;
+    }
+
     @media (max-width: 480px) {
       .nav-logo img {
         height: 1.6rem;
@@ -237,7 +245,7 @@
   <nav class="nav-bar fade-in">
     <div class="nav-logo">
       <img src="학교로고.png" alt="학교 로고" />
-      <span>서울삼육고등학교</span>
+      <span class="nav-home" style="user-select:none;">서울삼육고등학교</span>
     </div>
     <div class="nav-links">
       <a href="#home" class="nav-link active">🏠 홈</a>
@@ -259,15 +267,21 @@
             확인</strong>과 <strong>문의 / 건의</strong>도 할 수 있어요.
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+          <div style="cursor:pointer;"
+            class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 home-link"
+            data-target="papers">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">논문 열람</h3>
             <p class="text-sm text-gray-500">학교 연구논문을 검색하고 바로 열람할 수 있어요.</p>
           </div>
-          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+          <div style="cursor:pointer;"
+            class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 home-link"
+            data-target="lectures">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">온라인 강의</h3>
             <p class="text-sm text-gray-500">언제 어디서나 수업을 듣고 복습할 수 있어요.</p>
           </div>
-          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+          <div style="cursor:pointer;"
+            class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 home-link"
+            data-target="rentals">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">물품 대여</h3>
             <p class="text-sm text-gray-500">교내 기자재를 손쉽게 대여하고 관리할 수 있어요.</p>
           </div>
@@ -280,8 +294,8 @@
         <div id="paper-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- 논문 카드가 여기에 표시됩니다 -->
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-            <h3 class="text-xl font-semibold mb-2 text-blue-700">AI의 개발의 전망</h3>
-            <p class="text-sm text-gray-500 mb-4">저자: 이지인 | 발행일: 2025-01-01</p>
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">딥러닝(학습 방법 및 세부 내용)</h3>
+            <p class="text-sm text-gray-500 mb-4">저자: 최국준 | 발행일: 2024-12-03</p>
             <button class="btn-available">열람하기</button>
           </div>
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
@@ -296,13 +310,13 @@
         <p class="text-lg text-gray-600 leading-relaxed mb-8">다양한 강의를 수강하여 지식을 넓히세요.</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-            <h3 class="text-xl font-semibold mb-2 text-blue-700">컴퓨터 과학 입문</h3>
-            <p class="text-sm text-gray-500 mb-4">강사: 최수지 | 기간: 2025-03-01 ~ 2025-06-01</p>
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">손 동작 댄스 기초</h3>
+            <p class="text-sm text-gray-500 mb-4">강사: Rick Astley | 기간: 2009-10-25</p>
             <button class="btn-available">수강하기</button>
           </div>
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">데이터 분석 기초</h3>
-            <p class="text-sm text-gray-500 mb-4">강사: 박인권 | 기간: 2025-04-01 ~ 2025-07-01</p>
+            <p class="text-sm text-gray-500 mb-4">강사: 코딩 애플 | 2024-11-13</p>
             <button class="btn-available">수강하기</button>
           </div>
         </div>
@@ -366,12 +380,15 @@
         <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
           <form action="https://formspree.io/f/xyzpnjvl" method="POST" id="contact-form2" autocomplete="off">
             <label class="block mb-2 font-semibold text-blue-900">이름
-              <input type="text" name="name" class="search-bar" required autocomplete="off" autocapitalize="off" spellcheck="false">
+              <input type="text" name="name" class="search-bar" required autocomplete="off" autocapitalize="off"
+                spellcheck="false">
             </label>
             <input type="hidden" name="email" value="seoulsahmyook63@gmail.com">
-            <label for="contact-message" class="block mb-1 font-semibold text-blue-900" style="margin-left:2px;">문의 내용</label>
+            <label for="contact-message" class="block mb-1 font-semibold text-blue-900" style="margin-left:2px;">문의
+              내용</label>
             <div class="mb-2">
-              <textarea id="contact-message" name="message" class="search-bar pr-28" rows="4" required autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+              <textarea id="contact-message" name="message" class="search-bar pr-28" rows="4" required
+                autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
             </div>
             <button type="submit" class="btn-available mt-2">보내기</button>
             <div id="contact-success2" style="display:none; color:#2563eb; margin-top:1rem; font-weight:600;">
@@ -384,6 +401,10 @@
   </main>
 
   <script>
+    document.querySelector('.nav-home').addEventListener('click', function () {
+      showSection('home');
+    });
+
     function showSection(sectionId) {
       document.querySelectorAll('main section').forEach(section => {
         section.classList.add('hidden');
@@ -405,6 +426,13 @@
         e.preventDefault();
         const sectionId = e.currentTarget.getAttribute('href').substring(1);
         showSection(sectionId);
+      });
+    });
+
+    document.querySelectorAll('.home-link').forEach(link => {
+      link.addEventListener('click', function () {
+        const target = link.getAttribute('data-target');
+        showSection(target);
       });
     });
 
@@ -438,6 +466,25 @@
         }
       }).catch(() => {
         alert('전송에 실패했습니다. 다시 시도해주세요.');
+      });
+    });
+
+    document.querySelectorAll('#lectures .btn-available').forEach((btn, idx) => {
+      btn.addEventListener('click', function () {
+        const links = [
+          'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          'https://www.youtube.com/watch?v=iddwmz_2nzo'
+        ];
+        window.open(links[idx], 'lecturePopup', 'width=900,height=600');
+      });
+    });
+    document.querySelectorAll('#paper-list .btn-available').forEach((btn, idx) => {
+      btn.addEventListener('click', function () {
+        const links = [
+          'https://docs.google.com/document/d/1uRX14w6okfR6O8AydWyELWCo3BIhhDcInFdmQbHsjvs/edit?tab=t.0#heading=h.9k2tf69rmoq9',
+          'https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11700923'
+        ];
+        window.open(links[idx], 'paperPopup', 'width=900,height=600');
       });
     });
   </script>
