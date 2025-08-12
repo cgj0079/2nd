@@ -354,7 +354,8 @@
       <section id="lectures" class="hidden">
         <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">온라인 강의</h2>
         <p class="text-lg text-gray-600 leading-relaxed mb-8">다양한 강의를 수강하여 지식을 넓히세요.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="text" class="search-bar" id="lecture-search" placeholder="강의 제목 또는 키워드를 입력하세요" autocomplete="off">
+        <div id="lecture-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">이차함수 이해하기(EBSi)</h3>
             <p class="text-sm text-gray-500 mb-4">강사: 정승재 | 기간: 2023-06-07</p>
@@ -506,6 +507,17 @@
           card.style.display = 'none';
         }
       })
+    });
+
+    document.getElementById('lecture-search').addEventListener('input', function (e) {
+      const keyword = e.target.value.trim();
+      document.querySelectorAll('#lecture-list > div').forEach(card => {
+        if (!keyword || card.textContent.includes(keyword)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     });
 
     document.getElementById('contact-form2').addEventListener('submit', function (e) {
