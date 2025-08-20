@@ -10,6 +10,7 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
     }
 
     .fade-in {
@@ -112,6 +113,22 @@
       opacity: 0.7;
     }
 
+    .info-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #374151;
+      font-size: 12px;
+      margin-left: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    .info-btn:hover { background: #d1d5db; }
+
     .nav-bar {
       position: fixed;
       top: 0;
@@ -174,6 +191,7 @@
 
     section {
       scroll-margin-top: 8rem;
+      background-color: transparent;
     }
 
     .main-content {
@@ -188,16 +206,38 @@
       .max-w-4xl {
         max-width: 100vw;
       }
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        column-gap: 0.5rem;
+        row-gap: 0.4rem;
+      }
+      .nav-link {
+        justify-content: center;
+        flex: initial;
+        width: auto;
+      }
     }
 
     @media (max-width: 768px) {
       .nav-links {
         gap: 0.2rem;
+        width: 100%;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        column-gap: 0.4rem;
+        row-gap: 0.35rem;
       }
 
       .nav-link {
         font-size: 0.98rem;
         padding: 0.45rem 0.7rem;
+        justify-content: center;
+        flex: initial;
+        width: auto;
       }
 
       .nav-logo span {
@@ -266,6 +306,17 @@
       }
     }
 
+    .card,
+    .table,
+    form,
+    .content-box {
+      background-color: white;
+      /* 컨텐츠는 흰색 카드로 */
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+    }
+
     /* 모바일에서 테이블 가로 스크롤 */
     @media (max-width: 600px) {
       .table {
@@ -275,6 +326,63 @@
 
       .max-w-4xl {
         max-width: 100vw;
+      }
+    }
+
+    html.modal-open,
+    body.modal-open {
+      overflow: hidden !important;
+      height: 100%;
+    }
+
+    #rental-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #rental-modal.open { display: flex; }
+
+    /* 모달 등장 애니메이션 */
+    @keyframes modalIn {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.96); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    #rental-modal.open .modal-inner {
+      animation: modalIn 220ms ease-out forwards;
+    }
+
+
+    #rental-modal .modal-inner {
+      background: #fff;
+      max-width: 420px;
+      width: 95vw;
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+      padding: 2.2rem 2rem 2rem 2rem;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      min-width: 320px;
+      max-height: none;
+      overflow: visible;
+    }
+
+    @media (max-width: 480px) {
+      #rental-modal .modal-inner {
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+        min-width: 0;
+        max-width: 98vw;
       }
     }
   </style>
@@ -325,6 +433,12 @@
             <h3 class="text-xl font-semibold mb-2 text-blue-700">물품 대여</h3>
             <p class="text-sm text-gray-500">교내 기자재를 손쉽게 대여하고 관리할 수 있어요.</p>
           </div>
+          <a href="https://forms.gle/uaEurN7Hx2eUx9o57" target="_blank" rel="noopener"
+             class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300"
+             style="text-decoration:none;">
+            <h3 class="text-xl font-semibold mb-2 text-blue-700">논문/강의 제출</h3>
+            <p class="text-sm text-gray-500">논문이나 강의 영상을 제출받는 구글 폼으로 이동합니다.</p>
+          </a>
         </div>
       </section>
       <section id="papers" class="hidden">
@@ -336,17 +450,17 @@
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">딥러닝(학습 방법 및 세부 내용)</h3>
             <p class="text-sm text-gray-500 mb-4">저자: 최국준 | 발행일: 2024-12-03</p>
-            <button class="btn-available">열람하기</button>
+            <button class="btn-available" data-paper-url="https://docs.google.com/document/d/1uRX14w6okfR6O8AydWyELWCo3BIhhDcInFdmQbHsjvs/edit?tab=t.0#heading=h.9k2tf69rmoq9">열람하기</button>
           </div>
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">도파민 터지는 세상에서 왜 나는 우울한가</h3>
             <p class="text-sm text-gray-500 mb-4">저자: 장래혁 | 발행일: 2024-01</p>
-            <button class="btn-available">열람하기</button>
+            <button class="btn-available" data-paper-url="https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE11700923">열람하기</button>
           </div>
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">썸타기와 어장관리에 대한 철학적 고찰</h3>
             <p class="text-sm text-gray-500 mb-4">저자: 최성호 | 발행일: 2020-11</p>
-            <button class="btn-available">열람하기</button>
+            <button class="btn-available" data-paper-url="https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE10502917">열람하기</button>
           </div>
 
         </div>
@@ -355,18 +469,28 @@
         <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">온라인 강의</h2>
         <p class="text-lg text-gray-600 leading-relaxed mb-8">다양한 강의를 수강하여 지식을 넓히세요.</p>
         <input type="text" class="search-bar" id="lecture-search" placeholder="강의 제목 또는 키워드를 입력하세요" autocomplete="off">
+        <div id="lecture-player" class="mt-6 hidden fade-in">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-semibold">강의 영상</h3>
+            <button id="lecture-close" class="text-sm text-gray-500 hover:text-gray-700">닫기</button>
+          </div>
+          <div id="video-container" class="aspect-w-16 aspect-h-9 bg-black rounded"></div>
+        </div>
         <div id="lecture-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">이차함수 이해하기(EBSi)</h3>
             <p class="text-sm text-gray-500 mb-4">강사: 정승재 | 기간: 2023-06-07</p>
-            <button class="btn-available">수강하기</button>
+            <button class="btn-available lecture-play" data-video="https://www.youtube.com/watch?v=LLWucAoYLRY">바로 재생</button>
           </div>
           <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
             <h3 class="text-xl font-semibold mb-2 text-blue-700">데이터 분석 기초 개념</h3>
             <p class="text-sm text-gray-500 mb-4">강사: 곽팀장 | 2023-01-09</p>
-            <button class="btn-available">수강하기</button>
+            <button class="btn-available lecture-play" data-video="https://www.youtube.com/watch?v=7YQOi7gUKEo">바로 재생</button>
           </div>
         </div>
+        <div id="lecture-empty" class="hidden text-gray-500 mt-4">검색 결과가 없습니다.</div>
+
+        
       </section>
       <section id="rentals" class="hidden">
         <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">물품 대여</h2>
@@ -382,20 +506,68 @@
           </thead>
           <tbody>
             <tr>
-              <td>노트북</td>
+              <td>노트북 1</td>
               <td>대여 가능</td>
               <td>즉시</td>
-              <td><button class="btn-available">대여하기</button></td>
+              <td><button class="btn-available rental-btn" data-item="노트북">대여하기</button></td>
+            </tr>
+            <tr>
+              <td>노트북 2</td>
+              <td>대여 가능</td>
+              <td>즉시</td>
+              <td><button class="btn-available rental-btn" data-item="노트북">대여하기</button></td>
+            </tr>
+            <tr>
+              <td>노트북 3</td>
+              <td>대여 가능</td>
+              <td>즉시</td>
+              <td><button class="btn-available rental-btn" data-item="노트북">대여하기</button></td>
+            </tr>
+            <tr>
+              <td>노트북 4</td>
+              <td>대여 가능</td>
+              <td>즉시</td>
+              <td><button class="btn-available rental-btn" data-item="노트북">대여하기</button></td>
             </tr>
             <tr>
               <td>프로젝터</td>
               <td>대여 중</td>
-              <td>2025-08-23</td>
+              <td>2025-08-26</td>
               <td><button class="btn-unavailable" disabled>대여하기</button></td>
             </tr>
           </tbody>
         </table>
       </section>
+      <div id="rental-modal" class="hidden">
+        <div class="modal-inner">
+          <button id="rental-modal-close"
+            style="position:absolute; top:12px; right:18px; font-size:1.3rem; color:#888; background:none; border:none; cursor:pointer; z-index:2;">×</button>
+          <h3 class="text-xl font-bold mb-3 text-blue-800" id="rental-modal-title" style="text-align:center;">물품 대여 신청
+          </h3>
+          <form id="rental-form" autocomplete="off">
+            <label class="block mb-2 font-semibold text-blue-900">대여 기간(최대 3일)
+              <input type="number" min="1" max="3" name="period" class="search-bar" required placeholder="1~3일 입력"
+                style="margin-bottom:0;">
+            </label>
+            <label class="block mb-2 font-semibold text-blue-900">학번
+              <input type="text" name="studentId" class="search-bar" required maxlength="10" pattern="[0-9]+"
+                placeholder="학번 입력" style="margin-bottom:0;">
+            </label>
+            <label class="block mb-2 font-semibold text-blue-900">전화번호
+              <div style="display:flex; align-items:center; gap:6px;">
+                <input type="tel" name="phone" class="search-bar" required maxlength="13" pattern="[0-9\-]+"
+                  placeholder="010-0000-0000" style="margin-bottom:0; flex:1;">
+                <button type="button" id="phone-info" class="info-btn" aria-label="전화번호가 필요한 이유">?</button>
+              </div>
+            </label>
+            <button type="submit" class="btn-available mt-2 w-full">신청하기</button>
+            <div id="rental-success"
+              style="display:none; color:#2563eb; margin-top:1rem; font-weight:600; text-align:center;">
+              대여 신청이 완료되었습니다!
+            </div>
+          </form>
+        </div>
+      </div>
       <section id="schedule" class="hidden">
         <h2 class="text-4xl font-bold mb-4 text-blue-800 tracking-tight">학사 일정</h2>
         <p class="text-lg text-gray-600 leading-relaxed mb-8">중요한 학사 일정을 확인하세요.</p>
@@ -476,10 +648,23 @@
         link.classList.remove('active');
       });
       document.querySelector(`.nav-link[href="#${sectionId}"]`).classList.add('active');
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 10);
+      // 섹션 전환 시 카드 슬라이드 애니메이션
+      if (sectionId === 'lectures') {
+        document.querySelectorAll('#lecture-list > div').forEach(card => {
+          card.classList.remove('slide-in');
+          void card.offsetWidth;
+          card.classList.add('slide-in');
+        });
+      } else if (sectionId === 'papers') {
+        document.querySelectorAll('#paper-list > div').forEach(card => {
+          card.classList.remove('slide-in');
+          void card.offsetWidth;
+          card.classList.add('slide-in');
+        });
+      }
+      // 제목이 최상단에 보이도록 섹션 컨테이너 스크롤을 최상단으로
+      const main = document.querySelector('.main-content');
+      if (main) main.scrollTo({ top: 0, behavior: 'smooth' });
     }
     showSection('home');
 
@@ -510,14 +695,14 @@
     });
 
     document.getElementById('lecture-search').addEventListener('input', function (e) {
-      const keyword = e.target.value.trim();
+      const keyword = e.target.value.trim().toLowerCase();
+      let visibleCount = 0;
       document.querySelectorAll('#lecture-list > div').forEach(card => {
-        if (!keyword || card.textContent.includes(keyword)) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
+        const match = !keyword || card.textContent.toLowerCase().includes(keyword);
+        card.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
       });
+      document.getElementById('lecture-empty').classList.toggle('hidden', visibleCount !== 0);
     });
 
     document.getElementById('contact-form2').addEventListener('submit', function (e) {
@@ -542,25 +727,152 @@
       });
     });
 
-    document.querySelectorAll('#lectures .btn-available').forEach((btn, idx) => {
-      btn.addEventListener('click', function () {
-        const links = [
-          'https://www.youtube.com/watch?v=LLWucAoYLRY',
-          'https://www.youtube.com/watch?v=7YQOi7gUKEo'
-        ];
-        window.open(links[idx], 'lecturePopup', 'width=900,height=600');
+    // 논문/강의 제출 폼 토글
+    const paperSubmitToggle = document.getElementById('paper-submit-toggle');
+    const paperSubmitForm = document.getElementById('paper-submit-form');
+    if (paperSubmitToggle && paperSubmitForm) {
+      paperSubmitToggle.addEventListener('click', () => {
+        const isHidden = paperSubmitForm.classList.contains('hidden');
+        paperSubmitForm.classList.toggle('hidden');
+        paperSubmitToggle.textContent = isHidden ? '제출 폼 닫기' : '제출 폼 열기';
+      });
+      paperSubmitForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const form = e.target;
+        fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+          .then(r => {
+            if (r.ok) {
+              document.getElementById('paper-submit-success').style.display = 'block';
+              form.reset();
+              setTimeout(() => { document.getElementById('paper-submit-success').style.display = 'none'; }, 2400);
+            } else { alert('제출에 실패했습니다. 다시 시도해주세요.'); }
+          }).catch(() => alert('제출에 실패했습니다. 다시 시도해주세요.'));
+      });
+    }
+
+    const lectureSubmitToggle = document.getElementById('lecture-submit-toggle');
+    const lectureSubmitForm = document.getElementById('lecture-submit-form');
+    if (lectureSubmitToggle && lectureSubmitForm) {
+      lectureSubmitToggle.addEventListener('click', () => {
+        const isHidden = lectureSubmitForm.classList.contains('hidden');
+        lectureSubmitForm.classList.toggle('hidden');
+        lectureSubmitToggle.textContent = isHidden ? '제출 폼 닫기' : '제출 폼 열기';
+      });
+      lectureSubmitForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const form = e.target;
+        fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+          .then(r => {
+            if (r.ok) {
+              document.getElementById('lecture-submit-success').style.display = 'block';
+              form.reset();
+              setTimeout(() => { document.getElementById('lecture-submit-success').style.display = 'none'; }, 2400);
+            } else { alert('제출에 실패했습니다. 다시 시도해주세요.'); }
+          }).catch(() => alert('제출에 실패했습니다. 다시 시도해주세요.'));
+      });
+    }
+
+    (function attachLecturePlayHandlers() {
+      const lecturePlayer = document.getElementById('lecture-player');
+      const videoContainer = document.getElementById('video-container');
+      const closeBtn = document.getElementById('lecture-close');
+      document.querySelectorAll('#lecture-list .lecture-play').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const src = btn.dataset.video;
+          let videoHTML = '';
+          if (src.includes('youtube.com') || src.includes('youtu.be')) {
+            const embedSrc = src.includes('watch?v=')
+              ? src.replace('watch?v=', 'embed/')
+              : (src.includes('youtu.be/')
+                  ? src.replace('youtu.be/', 'www.youtube.com/embed/')
+                  : src);
+            videoHTML = `<iframe class=\"w-full h-96 rounded\" src=\"${embedSrc}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>`;
+          } else {
+            videoHTML = `<video class=\"w-full h-96 rounded\" controls>
+                           <source src=\"${src}\" type=\"video/mp4\">
+                           지원하지 않는 브라우저입니다.
+                         </video>`;
+          }
+          videoContainer.innerHTML = videoHTML;
+          lecturePlayer.classList.remove('hidden');
+          lecturePlayer.classList.remove('fade-in');
+          void lecturePlayer.offsetWidth;
+          lecturePlayer.classList.add('fade-in');
+        });
+      });
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          lecturePlayer.classList.add('hidden');
+          videoContainer.innerHTML = '';
+        });
+      }
+    })();
+    // 논문 열람
+    document.querySelectorAll('#paper-list [data-paper-url]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-paper-url');
+        window.open(url, 'paperPopup', 'width=900,height=600');
       });
     });
-    document.querySelectorAll('#paper-list .btn-available').forEach((btn, idx) => {
+
+    // 강의 카드 버튼은 내부 플레이어로 재생
+
+    document.querySelectorAll('.rental-btn').forEach(btn => {
       btn.addEventListener('click', function () {
-        const links = [
-          'https://docs.google.com/document/d/1uRX14w6okfR6O8AydWyELWCo3BIhhDcInFdmQbHsjvs/edit?tab=t.0#heading=h.9k2tf69rmoq9',
-          'https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE11700923',
-          'https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE10502917'
-        ];
-        window.open(links[idx], 'paperPopup', 'width=900,height=600');
+        const modal = document.getElementById('rental-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('open');
+        document.getElementById('rental-modal-title').textContent = `${btn.dataset.item} 대여 신청`;
+        document.getElementById('rental-form').reset();
+        document.getElementById('rental-success').style.display = 'none';
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
       });
     });
+    document.getElementById('rental-modal-close').onclick = function () {
+      const modal = document.getElementById('rental-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('open');
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+    };
+    document.getElementById('rental-modal').onclick = function (e) {
+      if (e.target === this) {
+        this.classList.add('hidden');
+        this.classList.remove('open');
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+      }
+    };
+    document.getElementById('rental-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      // 실제 서버 전송 대신 성공 메시지 표시
+      document.getElementById('rental-success').style.display = 'block';
+      setTimeout(() => {
+        const modal = document.getElementById('rental-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('open');
+        document.getElementById('rental-success').style.display = 'none';
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+      }, 1800);
+    });
+    // 초기 로드시 모달이 보이지 않도록 보장
+    window.addEventListener("load", () => {
+      const modal = document.getElementById('rental-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('open');
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+    });
+
+    // 전화번호 안내 버튼
+    const phoneInfoBtn = document.getElementById('phone-info');
+    if (phoneInfoBtn) {
+      phoneInfoBtn.addEventListener('click', () => {
+        alert('전화번호는 미반납 또는 물품 손상 시 연락을 위해 필요합니다. 정확한 연락처를 입력해 주세요.');
+      });
+    }
 
     function updateDDay() {
       const today = new Date();
